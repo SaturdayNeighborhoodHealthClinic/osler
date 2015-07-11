@@ -57,9 +57,9 @@ MIDDLEWARE_CLASSES = (
     'shibboleth.middleware.ShibbolethRemoteUserMiddleware',
 )
 
-AUTHENTICATION_BACKENDS += (
+AUTHENTICATION_BACKENDS = [
   'shibboleth.backends.ShibbolethRemoteUserBackend',
-)
+]
 
 ROOT_URLCONF = 'clintools.urls'
 
