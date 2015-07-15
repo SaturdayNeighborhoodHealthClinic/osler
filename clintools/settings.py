@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'bootstrap3_datetime',
     'djangular',
+    'shibboleth',
 )
 
 MIDDLEWARE_CLASSES = (
