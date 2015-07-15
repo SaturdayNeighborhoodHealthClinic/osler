@@ -2,6 +2,20 @@ from pttrack import models
 from pttrack import followup_models
 from datetime import date
 
+from django.contrib.auth.models import User
+
+user = User.objects.create_user('jrporter', 'justinrporter@wusm.wustl.edu',
+                                'password')
+user.first_name = "Justin"
+user.last_name = "Porter"
+user.save()
+
+user = User.objects.create_user('rjain', 'jainr@wusm.wustl.edu',
+                                'password')
+user.first_name = "Radhika"
+user.last_name = "Jain"
+user.save()
+
 for lang_name in ["English", "Arabic", "Armenian", "Bengali", "Chinese",
                   "Croatian", "Czech", "Danish", "Dutch", "Finnish", "French",
                   "French Creole", "German", "Greek", "Hebrew", "Hindi/Urdu",
@@ -13,9 +27,18 @@ for lang_name in ["English", "Arabic", "Armenian", "Bengali", "Chinese",
     l = models.Language(name=lang_name)
     l.save()
 
-for ethnic_name in ["American Indian or Alaska Native", "Asian",
-                    "Black or African American", "Hispanic or Latino",
-                    "Native Hawaiian or Other Pacific Islander", "White"]:
+for ethnic_name in ["Afghanistani", "African American", "Albanian", "Algerian", 
+                    "Andorran", "Angolan", "Argentinian", "Armenian", "Australian", 
+                    "Bolivian", "Bosnian", "Brazilian", "Canadian", "Caucasian",
+                    "Chilean", "Chinese", "Colombian", "Croatian", "Czechoslovakian",
+                    "Egyptian", "French", "German", "Greek", "Haitian", "Hispanic", 
+                    "Honduran", "Indian", "Indonesian", "Iranian", "Iraqi", "Irish", 
+                    "Israeli", "Italian," "Jamaican", "Japanese", "Jordanian", "Kenyan",
+                    "Korean", "Laotian", "Latvian", "Lebanese", "Libyan", "Malaysian",
+                    "Mexican", "Namibian", "Norwegian", "Pakistani", "Romanian", 
+                    "Russian", "Rwandan", "Samoan", "Serbian," "Somalian", 
+                    "South African", "Spanish", "Syrian", "Taiwanese", "Turkish",
+                    "Vietnamese", "Yemenese", "Zimbabwean"]:
     e = models.Ethnicity(name=ethnic_name)
     e.save()
 
@@ -24,15 +47,15 @@ for lname in ["Male", "Female", "Other"]:
     g.save()
 
 
-p = models.Provider(first_name="Tommy",
-                    middle_name="Lee",
-                    last_name="Jones",
-                    phone="425-243-9115",
-                    gender=models.Gender.objects.all()[0],
-                    email="tljones@wustl.edu",
-                    can_attend=True,
-                    )
-p.save()
+# p = models.Provider(first_name="Tommy",
+#                     middle_name="Lee",
+#                     last_name="Jones",
+#                     phone="425-243-9115",
+#                     gender=models.Gender.objects.all()[0],
+#                     can_attend=True,
+#                     # associated_user=user)
+#                     )
+# p.save()
 
 p = models.Patient(first_name="Frankie",
                    middle_name="Lane",
@@ -44,15 +67,17 @@ p = models.Patient(first_name="Frankie",
                    phone="501-233-1234",
                    gender=models.Gender.objects.all()[0])
 p.save()
-p.language.add(l)
-p.ethnicity.add(e)
+p.languages.add(l)
+p.ethnicities.add(e)
 
-for lname in ["Attending Physician",
-              "Preclinical Medical Student",
-              "Clinical Medical Student",
-              "Coordinator"]:
-    p = models.ProviderType(long_name=lname, short_name=lname.split()[0])
+for (lname, can_sign) in [("Attending Physician", True),
+                          ("Preclinical Medical Student", False),
+                          ("Clinical Medical Student", False),
+                          ("Coordinator", False)]:
+    p = models.ProviderType(long_name=lname, short_name=lname.split()[0],
+                            signs_charts=can_sign)
     p.save()
+
 
 for clintype in ["Basic Care Clinic", "Depression & Anxiety Clinic",
                  "Dermatology Clinic", "Muscle and Joint Pain Clinic"]:
@@ -79,11 +104,11 @@ for cont_res in [
     rslt = followup_models.ContactResult(name=cont_res)
     rslt.save()
 
-for dx_type in ["Cardiovascular", "Dermatological", "Diabetes",
-                "Gastrointestinal", "Infectious Disease (e.g. flu or HIV)",
-                "Mental Health", "Musculoskeletal", "Neurological", "OB/GYN",
-                "Physical Exam", "Respiratory", "Rx Refill", "Urogenital",
-                "Vaccination", "Weight Concerns", "Other"]:
+for dx_type in ["Cardiovascular", "Dermatological", "Endocrine", 
+                "Eyes and ENT", "GI", "Infectious Disease (e.g. flu or HIV)", 
+                "Mental Health", "Musculoskeletal", "Neurological", 
+                "OB/GYN", "Physical Exam", "Respiratory", "Rx Refill", 
+                "Urogenital", "Vaccination/PPD", "Other"]:
     d = models.DiagnosisType(name=dx_type)
     d.save()
 
