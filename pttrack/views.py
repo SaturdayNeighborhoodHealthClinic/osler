@@ -300,10 +300,13 @@ def choose_clintype(request):
     RADIO_CHOICE_KEY = 'radio-roles'
 
     if request.POST:
+        print "POST", request.session.items()
         request.session['clintype_pk'] = request.POST[RADIO_CHOICE_KEY]
+        print "POST", request.session.items()
         return HttpResponseRedirect(request.GET['next'])
 
     if request.GET:
+        print "GET", request.session.items()
         role_options = request.user.provider.clinical_roles.all()
 
         if len(role_options) == 1:
