@@ -83,10 +83,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'clintools.wsgi.application'
 
 SHIBBOLETH_ATTRIBUTE_MAP = {
-   "shib-user": (True, "username"),
-   "shib-given-name": (False, "first_name"),
-   "shib-sn": (False, "last_name"),
-   "shib-mail": (False, "email"),
+   "wustlEduId": (True, "wustl-pk"),
+#   "cn": (False, "first_name"),
+   "givenName": (False, "first_name"),
+   "sn": (False, "last_name"),
+#   "mail": (False, "email"),
 }
 
 LOGIN_URL = 'https://pttrack.snhc.wustl.edu/Shibboleth.sso/Login'
