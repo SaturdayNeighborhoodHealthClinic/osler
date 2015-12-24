@@ -5,6 +5,7 @@ from django.views.generic.edit import FormView, UpdateView
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.core.exceptions import ImproperlyConfigured
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.forms import UserCreationForm
 import django.utils.timezone
 
 from . import models as mymodels
@@ -504,3 +505,12 @@ def reset_action_item(request, ai_id):
     ai.save()
     return HttpResponseRedirect(reverse("patient-detail",
                                         args=(ai.patient.id,)))
+
+class UserCreate(FormView):
+    template_name = 'pttrack/new-user.html'
+    form_class = UserCreationForm
+
+    def form_valid(self, form):
+        user = form.save()
+
+        return reverse("home")

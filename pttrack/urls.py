@@ -92,6 +92,9 @@ unwrapped_urlconf = [  # pylint: disable=invalid-name
     url(r'^clindate/(?P<pt_id>[0-9]+)/$',
         views.ClinicDateCreate.as_view(),
         name="new-clindate"),
+    url(r'^new_user/',
+        views.UserCreate.as_view(),
+        name="new-user")
 ]
 
 def url_wrap(urls):
@@ -100,7 +103,7 @@ def url_wrap(urls):
         if u.name in ['new-provider', 'choose-clintype']:
             # do not wrap in full regalia
             u._callback = login_required(u._callback)
-        elif u.name in ['about']:
+        elif u.name in ['about', 'new-user']:
             # do not wrap at all, fully public
             pass
         else:
