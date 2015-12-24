@@ -1,10 +1,16 @@
+![Build Status](https://travis-ci.org/SaturdayNeighborhoodHealthClinic/osler.svg?branch=master)
+![codecov.io](https://codecov.io/github/SaturdayNeighborhoodHealthClinic/osler/coverage.svg?branch=master)
+
+![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)
+
 # Osler
 
 This is our clintools project, which is a collection for all our
 patient tracking. It's a django project.
 
-![Build Status](https://travis-ci.org/SaturdayNeighborhoodHealthClinic/osler.svg?branch=master)
-[![codecov.io](https://codecov.io/github/SaturdayNeighborhoodHealthClinic/osler/coverage.svg?branch=master)](https://codecov.io/github/SaturdayNeighborhoodHealthClinic/osler?branch=master)
+You can check out a running demo at [oslerproject.org](http://oslerproject.org). The stack
+for this implementation is nginx + gunicorn + sqlite on a smallest-possible DigitalOcean
+droplet.
 
 ## Running locally
 
@@ -50,3 +56,9 @@ python manage.py runserver --settings clintools.debug_settings
 
 Once you have it running, you should be able to log into the debug database-backed
 app with the user 'jrporter' with password 'password'.
+
+## Deployment
+
+There a lot of good resources that teach you how to deploy a django app, and there
+are many ways to do it correctly. There's nothing too special about Osler in this regard!
+However, we strongly recommmend [nginx, gunicorn, and postgres](http://michal.karzynski.pl/blog/2013/06/09/django-nginx-gunicorn-virtualenv-supervisor/).
