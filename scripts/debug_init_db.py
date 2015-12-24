@@ -61,4 +61,32 @@ models.ActionItem.objects.create(
     author=prov,
     author_type=prov.clinical_roles.all()[0])
 
+
+p = models.Patient(first_name="Alan",
+                   last_name="Turing",
+                   address="85 Albert Embankment",
+                   date_of_birth=date(year=1912, month=6, day=23),
+                   gender=models.Gender.objects.all()[0])
+p.save()
+
+p.languages.add(models.Language.objects.all()[2])
+p.ethnicities.add(models.Ethnicity.objects.all()[1])
+
+models.Workup.objects.create(
+    author=prov,
+    author_type=prov.clinical_roles.all()[0],
+    patient=p,
+    clinic_day=models.ClinicDate.objects.create(
+        clinic_type=models.ClinicType.objects.all()[0],
+        clinic_date=date.today()),
+    chief_complaint="Depression",
+    diagnosis="Dperession",
+    HPI="Started becoming depressed after being being found guilty.",
+    PMH_PSH="Noncontributory.",
+    meds="stilboestrol",
+    fam_hx="Noncontributory",
+    soc_hx="Few friends?",
+    ros="Noncontributory",
+    pe="")
+
 print "Done!"
