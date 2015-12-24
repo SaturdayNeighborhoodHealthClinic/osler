@@ -9,7 +9,7 @@ script.
 
 from django.contrib.auth.models import User
 from pttrack import models
-from datetime import date
+from datetime import date, timedelta
 
 # pylint: disable=invalid-name
 
@@ -19,34 +19,46 @@ user.first_name = "Justin"
 user.last_name = "Porter"
 user.save()
 
-user = User.objects.create_user('rjain', 'jainr@wusm.wustl.edu',
-                                'password')
-user.first_name = "Radhika"
-user.last_name = "Jain"
-user.save()
+prov = models.Provider.objects.create(
+    first_name="Justin",
+    last_name="Porter",
+    phone="123455",
+    gender=models.Gender.objects.all()[0],
+    associated_user=user)
 
-# p = models.Provider(first_name="Tommy",
-#                     middle_name="Lee",
-#                     last_name="Jones",
-#                     phone="425-243-9115",
-#                     gender=models.Gender.objects.all()[0],
-#                     can_attend=True,
-#                     # associated_user=user)
-#                     )
-# p.save()
+for role in models.ProviderType.objects.all():
+    prov.clinical_roles.add(role)
 
-
+# build a patient.
 p = models.Patient(first_name="Frankie",
                    middle_name="Lane",
                    last_name="McNath",
                    address="6310 Scott Ave.",
-                   date_of_birth=date(year=1989,
-                                      month=8,
-                                      day=9),
+                   date_of_birth=date(year=1989, month=8, day=9),
                    phone="501-233-1234",
-                   gender=models.Gender.objects.all()[0])
+                   gender=models.Gender.objects.all()[0],
+                   needs_workup=True)
 p.save()
+
 p.languages.add(models.Language.objects.all()[0])
 p.ethnicities.add(models.Ethnicity.objects.all()[0])
+
+p = models.Patient(first_name="Antonie",
+                   last_name="Dodson",
+                   address="3223 Main St.",
+                   date_of_birth=date(year=1991, month=9, day=7),
+                   gender=models.Gender.objects.all()[0])
+p.save()
+
+p.languages.add(models.Language.objects.all()[1])
+p.ethnicities.add(models.Ethnicity.objects.all()[2])
+
+models.ActionItem.objects.create(
+    instruction=models.ActionInstruction.objects.all()[0],
+    due_date=date.today()-timedelta(40),
+    comments="Somebody really needs to call this guy.",
+    patient=p,
+    author=prov,
+    author_type=prov.clinical_roles.all()[0])
 
 print "Done!"
