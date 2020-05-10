@@ -16,11 +16,10 @@ class DrugCategory(models.Model):
 
 class Formulation(models.Model):
 
-    dose_mg = models.DecimalField(
-        max_digits=10, decimal_places=4, null=True, blank=True)
+    dose = models.CharField(max_length=10, blank=True, primary_key=True)
 
     def __str__(self):
-        return '{}'.format(self.dose_mg)
+        return '{}'.format(self.dose)
 
 
 class Drugs(models.Model):
@@ -34,4 +33,4 @@ class Drugs(models.Model):
     dose = models.ForeignKey(Formulation)
 
     def __str__(self):
-        return 'Category: {0} Name: {1} Dose: {2}'.format(self.category, self.name, self.dose)
+        return 'Category: {0}, Name: {1}, Dose: {2}, Total Inventory: {3}'.format(self.category, self.name, self.dose, self.total_inventory)
