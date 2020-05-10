@@ -1,0 +1,27 @@
+{% extends "pttrack/base.html" %}
+
+{% block title %}
+Drug Inventory
+{% endblock %}
+
+{% block header %}
+<h2>Drug Inventory</h2>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <table class="table" id="drugs-table">
+        <tr><th>Drug Category</th><th>Name</th><th>Dose</th><th>Total Inventory</th></tr>
+        {% for drug in drugs %}
+            <tr>
+                <td>{{ drug.category }}</td>
+                <td>{{ drug.name }}</td>
+                <td>{{ drug.dose }}</td>
+                <td>{{ drug.total_inventory }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock %}

@@ -22,7 +22,7 @@ class Formulation(models.Model):
         return '{}'.format(self.dose)
 
 
-class Drugs(models.Model):
+class Drug(models.Model):
 
     name = models.CharField(max_length=100, blank=False)
 

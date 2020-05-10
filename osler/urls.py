@@ -21,6 +21,7 @@ urlpatterns = [
         RedirectView.as_view(pattern_name="dashboard-dispatch",
                              permanent=False),
         name='root'),
+    url(r'^inventory/', include('inventory.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
