@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'simple_history',
     'rest_framework',
     'audit',
+    'labs',
 )
 
 MIDDLEWARE = (
