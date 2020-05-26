@@ -8,29 +8,37 @@ from django.db import models
 
 class DrugCategory(models.Model):
 
-    name = models.CharField(max_length=100, blank=False, primary_key=True)
+    name = models.CharField(max_length=100, primary_key=True)
 
     def __str__(self):
         return '{}'.format(self.name)
 
 
-class Formulation(models.Model):
+class MeasuringUnit(models.Model):
 
-    dose = models.CharField(max_length=10, blank=True, primary_key=True)
+    name = models.CharField(max_length=50, primary_key=True)
 
     def __str__(self):
-        return '{}'.format(self.dose)
+        return '{}'.format(self.name)
 
 
 class Drug(models.Model):
 
     name = models.CharField(max_length=100, blank=False)
 
-    total_inventory = models.IntegerField(default=0, null=True, blank=True)
+    unit = models.ForeignKey(MeasuringUnit, blank=True, null=True)
+
+    dose = models.DecimalField(
+        max_digits=10, decimal_places=3, blank=True, null=True)
+
+    total_inventory = models.PositiveSmallIntegerField(
+        default=0, blank=True, null=True)
 
     category = models.ForeignKey(DrugCategory)
 
-    dose = models.ForeignKey(Formulation)
+    def dose_empty(self):
+        if dose == '':
+            return True
 
     def __str__(self):
-        return 'Category: {0}, Name: {1}, Dose: {2}, Total Inventory: {3}'.format(self.category, self.name, self.dose, self.total_inventory)
+        return 'Category: {0}, Name: {1}, Unit:{2}, Dose: {3}, Total Inventory: {4}'.format(self.category, self.name, self.unit, self.dose, self.total_inventory)

@@ -16,7 +16,7 @@ Drug Inventory
             <tr>
                 <td>{{ drug.category }}</td>
                 <td>{{ drug.name }}</td>
-                <td>{{ drug.dose }}</td>
+                <td>{{ drug.dose }} {{ drug.unit }}</td>
                 <td>{{ drug.total_inventory }}</td>
             </tr>
         {% endfor %}

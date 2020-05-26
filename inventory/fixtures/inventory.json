@@ -1,0 +1,72 @@
+[
+{
+    "model": "inventory.drugcategory",
+    "pk": "Other",
+    "fields": {}
+},
+{
+    "model": "inventory.drugcategory",
+    "pk": "Supplements",
+    "fields": {}
+},
+{
+    "model": "inventory.drugcategory",
+    "pk": "Allergy",
+    "fields": {}
+},
+{
+    "model": "inventory.drugcategory",
+    "pk": "Cardiovascular",
+    "fields": {}
+},
+{
+    "model": "inventory.drugcategory",
+    "pk": "Pain Relief",
+    "fields": {}
+},
+{
+    "model": "inventory.drugcategory",
+    "pk": "Antibiotics",
+    "fields": {}
+},
+{
+    "model": "inventory.drugcategory",
+    "pk": "Endocrine/GI",
+    "fields": {}
+},
+{
+    "model": "inventory.drugcategory",
+    "pk": "Respiratory",
+    "fields": {}
+},
+{
+    "model": "inventory.measuringunit",
+    "pk": "mg",
+    "fields": {}
+},
+{
+    "model": "inventory.measuringunit",
+    "pk": "%",
+    "fields": {}
+},
+{
+    "model": "inventory.measuringunit",
+    "pk": "IU",
+    "fields": {}
+},
+{
+    "model": "inventory.measuringunit",
+    "pk": "mL",
+    "fields": {}
+},
+{
+    "model": "inventory.measuringunit",
+    "pk": "mEq",
+    "fields": {}
+},
+{
+    "model": "inventory.measuringunit",
+    "pk": "mcg",
+    "fields": {}
+}
+]

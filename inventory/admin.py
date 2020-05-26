@@ -18,6 +18,6 @@ class ViewAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(models.Formulation)
+@admin.register(models.MeasuringUnit)
 class ViewAdmin(admin.ModelAdmin):
     pass
