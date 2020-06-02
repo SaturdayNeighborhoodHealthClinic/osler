@@ -15,8 +15,13 @@ Drug Inventory
         {% for drug in drugs %}
             <tr>
                 <td>{{ drug.category }}</td>
-                <td>{{ drug.name }}</td>
-                <td>{{ drug.dose }} {{ drug.unit }}</td>
+                <td><a href="{% url 'drug-update' pk=drug.id %}">{{ drug.name }}</a></td>
+                <td>{% if drug.dose %}
+                        {{ drug.dose }}
+                    {% endif %}
+                    {% if drug.unit %}
+                        {{ drug.unit }}
+                    {% endif %}</td>
                 <td>{{ drug.total_inventory }}</td>
             </tr>
         {% endfor %}
@@ -25,3 +30,7 @@ Drug Inventory
 
 
 {% endblock %}
+
+
+<h2> <a href="{% url 'patient-update' pk=patient.id %}">{{ patient.last_name }}, {{ patient.first_name }} {{ patient.middle_name }}
+        </a></h2>

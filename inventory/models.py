@@ -10,16 +10,16 @@ class DrugCategory(models.Model):
 
     name = models.CharField(max_length=100, primary_key=True)
 
-    def __str__(self):
-        return '{}'.format(self.name)
+    def __unicode__(self):
+        return self.name
 
 
 class MeasuringUnit(models.Model):
 
     name = models.CharField(max_length=50, primary_key=True)
 
-    def __str__(self):
-        return '{}'.format(self.name)
+    def __unicode__(self):
+        return self.name
 
 
 class Drug(models.Model):
@@ -36,9 +36,5 @@ class Drug(models.Model):
 
     category = models.ForeignKey(DrugCategory)
 
-    def dose_empty(self):
-        if dose == '':
-            return True
-
-    def __str__(self):
-        return 'Category: {0}, Name: {1}, Unit:{2}, Dose: {3}, Total Inventory: {4}'.format(self.category, self.name, self.unit, self.dose, self.total_inventory)
+    def __unicode__(self):
+        return self.name
